@@ -4,15 +4,24 @@ def readCountryMap():
     # context manager takes care of closing the file regardless of errors.
     with open("zone.csv", "r") as countryFile:
         countryData = countryFile.readlines()
-    return dict(csv.reader(countryData))
+    countries = csv.reader(countryData)
+    clean_list = []    
+    for country in countries:
+        temp = [country[1],country[2]]
+        clean_list.append(temp)
+    return dict(clean_list)
 
 def numzones_per_country():
-    dict = {}
+    result = {}
     countries = readCountryMap()
     for element in countries:
-        dict[element] = {element: + 1}
+        if element in countries:
+            result[element] += 1
+        else:
+           result[element] = 1
+         
 
-    print(dict)
+    print(result)
 
 numzones_per_country()
 
