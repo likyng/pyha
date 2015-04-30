@@ -9,8 +9,12 @@ def readCountryMap():
 def numzones_per_country():
     dict = {}
     countries = readCountryMap()
-    for element in countries
+    for element in countries:
+        dict[element] = {element: + 1}
 
+    print(dict)
 
-def numzones_per_continent():
+numzones_per_country()
+
+#def numzones_per_continent():
     
