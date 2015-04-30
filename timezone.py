@@ -15,7 +15,7 @@ def numzones_per_country():
     result = {}
     countries = readCountryMap()
     for element in countries:
-        if element in countries:
+        if element in result:
             result[element] += 1
         else:
            result[element] = 1
