@@ -1,23 +1,24 @@
 # timezone hausaufgabe
 # https://github.com/likyng/pyha/blob/master/timezone.py
 
-def readCountryMap():
-    import csv
+import csv
+
+def readFileMap(fileName, col1, col2):
 
     # context manager takes care of closing the file regardless of errors.
-    with open("zone.csv", "r") as countryFile:
+    with open(fileName, "r") as countryFile:
         countryData = countryFile.readlines()
     countries = csv.reader(countryData)
     clean_list = []    
     for country in countries:
         # to skip the first coloumn which contains not needed information
-        temp = [country[1],country[2]]
+        temp = [country[col1],country[col2]]
         clean_list.append(temp)
     return clean_list
 
 def numzones_per_country():
     result = {}
-    countries = readCountryMap()
+    countries = readFileMap("zone.csv", 1, 2)
     for element in countries:
         if str(element[0]) in result:
             result[str(element[0])] += 1
@@ -29,7 +30,7 @@ numzones_per_country()
 
 def numzones_per_continent():
     result = {}
-    continents = readCountryMap()
+    continents = readFileMap("zone.csv", 1, 2)
     for element in continents:
         if str(element[1]).split('/', maxsplit = 1)[0] in result:
             result[str(element[1]).split('/', maxsplit = 1)[0]] += 1
@@ -37,8 +38,8 @@ def numzones_per_continent():
             result[str(element[1]).split('/', maxsplit = 1)[0]] = 1
     print(result)
 
+print("\n")
 numzones_per_continent()
 
 # timezone hausaufgabe nr 2 (fortgeschrittene)
-
 
