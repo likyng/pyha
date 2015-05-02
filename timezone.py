@@ -26,7 +26,7 @@ def numzones_per_country():
            result[str(element[0])] = 1
     print(result)
 
-#numzones_per_country()
+numzones_per_country()
 
 def numzones_per_continent():
     result = {}
@@ -38,8 +38,7 @@ def numzones_per_continent():
             result[str(element[1]).split('/', maxsplit = 1)[0]] = 1
     print(result)
 
-print("\n")
-#numzones_per_continent()
+numzones_per_continent()
 
 # timezone hausaufgabe nr 2 (fortgeschrittene)
 def zone_countries():
@@ -50,13 +49,11 @@ def zone_countries():
             # wenn die ID noch nicht in der liste 
             if str(element[0]) not in result[str(element[1])]:
                 result[str(element[1])].append(str(element[0]))
-
         else:
             result[str(element[1])] = [element[0]]
+    # missing: replace ID's with the corresponding country name found in zone.csv
 
     print(result)
 
 zone_countries()
-
-
 
