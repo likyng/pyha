@@ -1,3 +1,6 @@
+# timezone hausaufgabe
+# https://github.com/likyng/pyha/blob/master/timezone.py
+
 def readCountryMap():
     import csv
 
@@ -7,6 +10,7 @@ def readCountryMap():
     countries = csv.reader(countryData)
     clean_list = []    
     for country in countries:
+        # to skip the first coloumn which contains not needed information
         temp = [country[1],country[2]]
         clean_list.append(temp)
     return clean_list
@@ -19,11 +23,7 @@ def numzones_per_country():
             result[str(element[0])] += 1
         else:
            result[str(element[0])] = 1
-         
-
     print(result)
 
 numzones_per_country()
 
-#def numzones_per_continent():
-    
