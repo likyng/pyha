@@ -3,39 +3,38 @@
 
 import csv
 
-def readFileMap(fileName, col1, col2):
+def readFile(fileName):
 
     # context manager takes care of closing the file regardless of errors.
-    with open(fileName, "r") as countryFile:
-        countryData = countryFile.readlines()
-    countries = csv.reader(countryData)
-    clean_list = []    
-    for country in countries:
-        # to skip the first coloumn which contains not needed information
-        temp = [country[col1],country[col2]]
-        clean_list.append(temp)
-    return clean_list
+    with open(fileName, "r") as openedFile:
+        fileData = openedFile.readlines()
+    data = csv.reader(fileData)
+    dataList = []    
+    for entry in data:
+        #temp = [country[col1],country[col2]]
+        dataList.append(entry)
+    return dataList
 
 def numzones_per_country():
     result = {}
-    countries = readFileMap("zone.csv", 1, 2)
+    countries = readFile("zone.csv")
     for element in countries:
-        if str(element[0]) in result:
-            result[str(element[0])] += 1
+        if str(element[1]) in result:
+            result[str(element[1])] += 1
         else:
-           result[str(element[0])] = 1
+           result[str(element[1])] = 1
     print(result)
 
 numzones_per_country()
 
 def numzones_per_continent():
     result = {}
-    continents = readFileMap("zone.csv", 1, 2)
+    continents = readFile("zone.csv")
     for element in continents:
-        if str(element[1]).split('/', maxsplit = 1)[0] in result:
-            result[str(element[1]).split('/', maxsplit = 1)[0]] += 1
+        if str(element[2]).split('/', maxsplit = 1)[0] in result:
+            result[str(element[2]).split('/', maxsplit = 1)[0]] += 1
         else:
-            result[str(element[1]).split('/', maxsplit = 1)[0]] = 1
+            result[str(element[2]).split('/', maxsplit = 1)[0]] = 1
     print(result)
 
 numzones_per_continent()
@@ -43,7 +42,7 @@ numzones_per_continent()
 # timezone hausaufgabe nr 2 (fortgeschrittene)
 def zone_countries():
     result = {}
-    timezones = readFileMap("timezone.csv", 0, 1)
+    timezones = readFile("timezone.csv")
     for element in timezones:
         if str(element[1]) in result:
             # wenn die ID noch nicht in der liste 
