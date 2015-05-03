@@ -41,12 +41,13 @@ numzones_per_continent()
 
 # timezone hausaufgabe nr 2 (fortgeschrittene)
 def zone_countries():
+    import time
     result = {}
     timezones = readFile("timezone.csv")
     for element in timezones:
         if str(element[1]) in result:
             # wenn die ID noch nicht in der liste 
-            if str(element[0]) not in result[str(element[1])]:
+            if str(element[0]) not in result[str(element[1])] and int(element[2]) <= time.time():
                 result[str(element[1])].append(str(element[0]))
         else:
             result[str(element[1])] = [element[0]]
