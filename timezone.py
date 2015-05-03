@@ -59,7 +59,7 @@ def zone_countries():
     zone = readFile("zone.csv")
     country = dict(readFile("country.csv"))
     
-    temp = [int(timezones[0][0]), timezones[0][2]]
+    temp = [int(timezones[0][0]), timezones[0][1], timezones[0][2]]
     for region in timezones:
         #if latest timezone found, skip future entries
         if int(region[0]) < temp[0]:
@@ -69,22 +69,22 @@ def zone_countries():
             continue
         #checking if entry is older than time()
         elif int(region[0]) == temp[0] and float(region[2]) <= time.time():
-            temp[1] = region[2]
+            temp[1] = region[1]     #copy timezone            
+            temp[2] = region[2]     #copy timestamp
         #if newer than time(), use entry from step before
         elif int(region[0]) == temp[0] and float(region[2]) >= time.time():
-            if str(region[1]) in result:
-                result[str(region[1])] += ", %s" % \
-                    country[(zone[temp[0]-1][1])]
+            if str(temp[1]) in result:
+                result[str(temp[1])] += ", %s" % country[zone[temp[0]-1][1]]
                 #replaces the abbreviation with the complete name
             else:
                 result[str(region[1])] = country[zone[temp[0]-1][1]]
             temp[0] += 1 #going to next ID
         #last entry is older than time() and will be used
         else:
-            temp[1] = region[2]
-            if str(region[1]) in result:
-                result[str(region[1])] += ", %s" % \
-                    country[(zone[temp[0]-1][1])]
+            temp[1] = region[1]     #go to next country
+            temp[2] = region[2]
+            if str(temp[1]) in result:
+                result[str(temp[1])] += ", %s" % country[(zone[temp[0]-1][1])]
             else:
                 result[str(region[1])] = country[zone[temp[0]-1][1]]
             temp[0] += 1
